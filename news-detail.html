@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新闻详情 - 土壤与地下水污染修复课题组</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-sese">
+          <img src="images/logos/sese-logo-green.png" alt="上海交通大学 环境科学与工程学院">
+        </div>
+        <div class="logo-text">
+          <h1>土壤与地下水污染修复课题组</h1>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="news.html" class="active">新闻动态</a>
+        <a href="team.html">科研团队</a>
+        <a href="publications.html">研究成果</a>
+        <a href="index.html#directions">研究方向</a>
+        <a href="index.html#about">关于我们</a>
+        <a href="index.html#contact">联系我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="news-detail-page">
+    <div class="news-detail-inner" id="newsContent"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>当前版权所有 土壤与地下水污染修复课题组· 上海交通大学环境科学与工程学院</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/news-data.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const container = document.getElementById('newsContent');
+    const news = getNewsById(id);
+
+    if (!news) {
+      container.innerHTML = `
+        <div class="news-not-found">
+          <h2>未找到该新闻</h2>
+          <p>请检查链接是否正确，或返回<a href="news.html">新闻列表</a>。</p>
+        </div>`;
+      document.title = '未找到 - 新闻动态';
+    } else {
+      document.title = `${news.titleZh || news.title} - 新闻动态`;
+      const { day, month, full } = formatNewsDate(news);
+      const tagClass = getCategoryClass(news.category);
+      const dateRange = news.dateEnd
+        ? `${news.date} 至 ${news.dateEnd}`
+        : full;
+
+      const metaItems = [
+        news.author && news.author !== '课题组' ? `<span>作者：${news.author}</span>` : '',
+        news.journal ? `<span>期刊：《${news.journal}》</span>` : '',
+        `<span>日期：${dateRange}</span>`
+      ].filter(Boolean).join('');
+
+      container.innerHTML = `
+        <nav class="breadcrumb">
+          <a href="index.html">首页</a> /
+          <a href="news.html">新闻动态</a> /
+          <a href="news.html?category=${encodeURIComponent(news.category)}">${news.category}</a>
+        </nav>
+
+        <article class="news-article">
+          <header class="news-article-header">
+            <span class="news-tag ${tagClass}">${news.category}</span>
+            <h1>${news.titleZh || news.title}</h1>
+            ${news.titleZh ? `<p class="news-title-en">${news.title}</p>` : ''}
+            <div class="news-article-meta">${metaItems}</div>
+            <div class="news-article-date">
+              <span class="day">${day}</span>
+              <span class="month">${month}</span>
+            </div>
+          </header>
+
+          <div class="news-article-body">
+            <p class="news-lead">${news.summary}</p>
+            <div class="news-content">${news.content.split('\n').map(p => `<p>${p}</p>`).join('')}</div>
+          </div>
+        </article>
+
+        <div class="news-nav-links">
+          <a href="news.html" class="back-link">← 返回新闻列表</a>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>

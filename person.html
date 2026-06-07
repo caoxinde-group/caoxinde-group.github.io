@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>成员介绍 - 土壤与地下水污染修复课题组</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-sese">
+          <img src="images/logos/sese-logo-green.png" alt="上海交通大学 环境科学与工程学院">
+        </div>
+        <div class="logo-text">
+          <h1>土壤与地下水污染修复课题组</h1>
+        </div>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">首页</a>
+        <a href="news.html">新闻动态</a>
+        <a href="team.html" class="active">科研团队</a>
+        <a href="publications.html">研究成果</a>
+        <a href="index.html#directions">研究方向</a>
+        <a href="index.html#about">关于我们</a>
+        <a href="index.html#contact">联系我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="person-page">
+    <div class="person-inner" id="personContent"></div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-bottom">
+        <p>当前版权所有 土壤与地下水污染修复课题组· 上海交通大学环境科学与工程学院</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/team-data.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const container = document.getElementById('personContent');
+    const member = getMemberById(id);
+
+    const categoryLabels = {
+      faculty: '导师',
+      postdoc: '博士后',
+      student: '在校硕博'
+    };
+
+    function renderList(items) {
+      if (!items || items.length === 0) return '';
+      return `<ul>${items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    }
+
+    function renderSection(title, content) {
+      if (!content) return '';
+      return `
+        <div class="person-section">
+          <h2>${title}</h2>
+          ${content}
+        </div>`;
+    }
+
+    if (!member) {
+      container.innerHTML = `
+        <div class="person-not-found">
+          <h2>未找到该成员</h2>
+          <p>请检查链接是否正确，或返回<a href="team.html">团队列表</a>。</p>
+        </div>`;
+      document.title = '未找到 - 土壤与地下水污染修复课题组';
+    } else {
+      document.title = `${member.name} - 科研团队 - 土壤与地下水污染修复课题组`;
+
+      const avatarUrl = getAvatarUrl(member);
+      const avatarHtml = avatarUrl
+        ? `<img src="${avatarUrl}" alt="${member.name}" class="person-avatar">`
+        : `<div class="person-avatar-placeholder">${member.name.charAt(0)}</div>`;
+
+      const researchTags = member.research.map(r =>
+        `<span>${r}</span>`
+      ).join('');
+
+      const emailHtml = member.email
+        ? `<p class="email">邮箱：<a href="mailto:${member.email}">${member.email}</a></p>`
+        : '';
+
+      const tabLink = `team.html?tab=${member.category}`;
+
+      container.innerHTML = `
+        <nav class="breadcrumb">
+          <a href="index.html">首页</a> /
+          <a href="team.html">科研团队</a> /
+          <a href="${tabLink}">${categoryLabels[member.category]}</a> /
+          ${member.name}
+        </nav>
+
+        <div class="person-header">
+          ${avatarHtml}
+          <div class="person-info">
+            <h1>${member.name}</h1>
+            <p class="name-en">${member.nameEn}</p>
+            <span class="title-badge">${member.role}</span>
+            ${emailHtml}
+            <div class="person-research-list">${researchTags}</div>
+          </div>
+        </div>
+
+        ${renderSection('个人简介', `<p>${member.bio}</p>`)}
+        ${renderSection('教育背景', renderList(member.education))}
+        ${renderSection('教授课程', renderList(member.courses))}
+        ${renderSection('主要荣誉奖项', renderList(member.honors))}
+      `;
+    }
+  </script>
+</body>
+</html>
