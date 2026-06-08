@@ -25,8 +25,8 @@
         <a href="index.html">首页</a>
         <a href="news.html">新闻动态</a>
         <a href="team.html">科研团队</a>
-        <a href="publications.html" class="active">研究成果</a>
         <a href="index.html#directions">研究方向</a>
+        <a href="publications.html" class="active">研究成果</a>
         <a href="index.html#about">关于我们</a>
         <a href="index.html#contact">联系我们</a>
       </nav>
@@ -40,8 +40,6 @@
 
   <section class="section publications-section">
     <div class="section-inner">
-      <div class="pub-stats" id="pubStats"></div>
-
       <div class="year-tabs-wrap">
         <div class="year-tabs" id="yearTabs"></div>
       </div>
@@ -131,32 +129,6 @@
       });
     }
 
-    function initStats() {
-      const years = getPublicationYears();
-      const estCount = PUBLICATIONS_DATA.filter(p =>
-        p.journal.includes('Environmental Science')).length;
-      const wrCount = PUBLICATIONS_DATA.filter(p =>
-        p.journal.startsWith('Water Research')).length;
-      document.getElementById('pubStats').innerHTML = `
-        <div class="pub-stat-item">
-          <div class="number">${PUBLICATIONS_DATA.length}</div>
-          <div class="label">论文总数</div>
-        </div>
-        <div class="pub-stat-item">
-          <div class="number">${years.length}</div>
-          <div class="label">跨越年份</div>
-        </div>
-        <div class="pub-stat-item">
-          <div class="number">${estCount}</div>
-          <div class="label">EST 论文</div>
-        </div>
-        <div class="pub-stat-item">
-          <div class="number">${wrCount}</div>
-          <div class="label">Water Research</div>
-        </div>`;
-    }
-
-    initStats();
     initYearTabs();
     renderList('all');
 
