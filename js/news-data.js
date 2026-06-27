@@ -26,7 +26,7 @@ const NEWS_DATA = [
     category: '论文',
     title: 'New insights into the detoxification of chromium (VI) from contaminated soils by human intestinal microbiota',
     titleZh: '人体肠道微生物群解毒污染土壤中六价铬的新见解',
-    author: '钱权',
+    author: '钱泉',
     date: '2026-05-15',
     journal: 'Environmental Science & Technology',
     summary: '课题组在 Environmental Science & Technology 发表关于人体肠道微生物解毒污染土壤中铬(VI)的研究成果。',
@@ -95,7 +95,7 @@ const NEWS_DATA = [
     author: '课题组',
     date: '2026-05-20',
     summary: '课题组在土壤地下水污染修复领域取得系列创新成果，获业界广泛关注。',
-    content: '土壤与地下水污染修复课题组长期致力于污染修复技术研发与应用，在土壤重金属稳定化、污染土壤地下水一体化修复等方面建立了系列创新技术，并成功应用于射击场、电子加工场地、化工厂、电镀厂等典型污染场地修复工程，相关成果获业界广泛关注。'
+    content: '土壤与地下水修复技术研究所长期致力于污染修复技术研发与应用，在土壤重金属稳定化、污染土壤地下水一体化修复等方面建立了系列创新技术，并成功应用于射击场、电子加工场地、化工厂、电镀厂等典型污染场地修复工程，相关成果获业界广泛关注。'
   }
 ];
 
