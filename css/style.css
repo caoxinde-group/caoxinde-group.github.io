@@ -70,6 +70,18 @@ ul { list-style: none; }
   width: auto;
 }
 
+.logo-institute {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.logo-institute img {
+  height: 40px;
+  width: auto;
+}
+
 .logo-text {
   min-width: 0;
 }
@@ -175,6 +187,7 @@ body.nav-open {
   .nav-menu a { padding: 8px 8px; font-size: 13px; }
   .logo-text h1 { font-size: 18px; }
   .logo-sese img { height: 36px; }
+  .logo-institute img { height: 34px; }
 }
 
 /* Hero Banner */
@@ -1483,6 +1496,7 @@ body.nav-open {
   }
 
   .logo-sese img { height: 30px; }
+  .logo-institute img { height: 28px; }
 
   .logo-text h1 {
     font-size: 13px;
@@ -1596,6 +1610,7 @@ body.nav-open {
 
 @media (max-width: 480px) {
   .logo-sese img { height: 22px; }
+  .logo-institute img { height: 20px; }
   .logo-text h1 { font-size: 11px; }
   .team-preview, .team-grid { grid-template-columns: 1fr; }
   .team-avatar { width: 90px; height: 90px; }

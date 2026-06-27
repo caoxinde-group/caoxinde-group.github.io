@@ -42,7 +42,7 @@ function renderDirectionGroups(container, options = {}) {
     container.innerHTML = RESEARCH_DIRECTIONS.map((group, i) => `
       <a href="directions.html" class="direction-card">
         <div class="direction-icon">${icons[i]}</div>
-        <h3>方向${DIRECTION_LABELS[i]}：${group.title}</h3>
+        <h3>${group.title}</h3>
       </a>
     `).join('');
     return;
